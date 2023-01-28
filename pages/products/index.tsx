@@ -1,3 +1,19 @@
-export default function Home(){
-  return <h2>products home page</h2>
+
+function ProductList({products}:any){
+  return <>
+  <h2>List of Products</h2>
+  </>
+}
+
+export default ProductList
+
+export async function getStaticProps(){
+  const response = await fetch('https://shopweb-api.herokuapp.com/products');
+  const data = await response.json();
+
+  return {
+    props: {
+      products: data
+    }
+  }
 }
