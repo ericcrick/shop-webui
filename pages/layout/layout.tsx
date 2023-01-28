@@ -1,11 +1,22 @@
 import Link from "next/link"
 import React from "react"
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useEffect } from 'react';
+
 
 type DashboardLayoutProps = {
   children: React.ReactNode,
 };
 
 export default function Layout({ children }: DashboardLayoutProps){
+  const { data: session, status } = useSession();
+  useEffect(() => {
+    if (status === 'unauthenticated') signIn();
+  }, [status]);
+
+  if (status !== 'authenticated') {
+    return <h2>Loading...</h2>;
+  }
   return(
     <>
       <header className="text-gray-600 body-font">
@@ -20,14 +31,37 @@ export default function Layout({ children }: DashboardLayoutProps){
             <a className="mr-5 hover:text-gray-900">Home</a>
             <a className="mr-5 hover:text-gray-900">About</a>
           </nav>
-          <button className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
-            <Link href='login'>
-              Login
+          {!session && status == "unauthenticated" && (
+            <Link href="/api/auth/signin" onClick={(e) => {
+                    e.preventDefault();
+                    signIn('github');
+            }}>
+            <button  className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
+              <Link onClick={(e)=>{e.preventDefault(); signIn('github')}} href='api/auth/sigin'>
+                Login
+              </Link>
+              <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </button>
             </Link>
-            <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-1" viewBox="0 0 24 24">
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </button>
+          )}
+
+          {session && status == 'authenticated' && (
+            <Link href="/api/auth/signout" onClick={(e) => {
+                e.preventDefault();
+                signOut();
+              }}>
+            <button  className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
+              <Link onClick={(e)=>{e.preventDefault(); signOut()}} href='api/auth/sigin'>
+                LogOut
+              </Link>
+              <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </button>
+            </Link>
+          )}
         </div>
       </header>
 

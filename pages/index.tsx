@@ -8,7 +8,11 @@ export default function Home() {
 
   return (
     <>
-      <Login/>
+      <div className='container'>
+        <h2>Welcome</h2>
+      </div>
+
+      {/* <Login/> */}
     </>
   )
 }
