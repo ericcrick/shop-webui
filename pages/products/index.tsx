@@ -1,7 +1,7 @@
 
 function ProductList({products}:any){
   return <>
-  <h2>List of Products</h2>
+  <h2>{products}</h2>
   </>
 }
 
