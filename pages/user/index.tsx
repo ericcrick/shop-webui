@@ -28,10 +28,10 @@ const Users = () => {
   },[])
 
   //component
-
-  console.log(users)
   return (
-  <section className="text-gray-600 body-font">
+    <>
+
+<section className="text-gray-600 body-font">
     <div className="container px-5 py-24 mx-auto">
       <div className="flex flex-col text-center w-full mb-20">
         <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">User List</h1>
@@ -50,7 +50,7 @@ const Users = () => {
           </thead>
           <tbody>
             {
-              users.map((user: any)=>(
+              users?.map((user: any)=>(
                 <tr key={user._id}>
                   <UserList user={user}/>
                 </tr>
@@ -61,7 +61,7 @@ const Users = () => {
       </div>
       <div className="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
         <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">Next Page
-          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-4 h-4 ml-2" viewBox="0 0 24 24">
+          <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-2" viewBox="0 0 24 24">
             <path d="M5 12h14M12 5l7 7-7 7"></path>
           </svg>
         </a>
@@ -69,6 +69,7 @@ const Users = () => {
       </div>
     </div>
   </section>
+    </>
   )
 }
 

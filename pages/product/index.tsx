@@ -1,12 +1,19 @@
 import ProductList from '@/components/product-list'
 import { BASE_URL } from '@/contants'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 
 
-const Products = () => {
+const Product = () => {
   type data = any[]
   const [products, setProducts]: data = useState([]);
+  const [removeProduct, setRemoveProduct] = useState({});
+
+
+  const handleDeleteProduct = (e: React.FormEvent<HTMLFormElement>)=>{
+    e.preventDefault();
+    console.log(e)    
+  }
   
   //using useEffects to fetch data
   useEffect( ()=>{
@@ -30,7 +37,8 @@ const Products = () => {
   //component
 
   return (
-  <section className="text-gray-600 body-font">
+    <>
+    <section className="text-gray-600 body-font">
     <div className="container px-5 py-24 mx-auto">
       <div className="flex flex-col text-center w-full mb-20">
         <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">All Products</h1>
@@ -49,7 +57,7 @@ const Products = () => {
           </thead>
           <tbody>
             {
-              products.map((product: any)=>(
+              products?.map((product: any)=>(
                 <tr key={product._id}>
                   <ProductList products={product}/>
                 </tr>
@@ -60,7 +68,7 @@ const Products = () => {
       </div>
       <div className="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
         <a className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">Next Page
-          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-4 h-4 ml-2" viewBox="0 0 24 24">
+          <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-2" viewBox="0 0 24 24">
             <path d="M5 12h14M12 5l7 7-7 7"></path>
           </svg>
         </a>
@@ -68,8 +76,9 @@ const Products = () => {
       </div>
     </div>
   </section>
+    </>
   )
 }
 
 
-export default Products;
+export default Product;

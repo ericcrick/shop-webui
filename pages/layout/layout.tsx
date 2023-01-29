@@ -29,8 +29,8 @@ export default function Layout({ children }: DashboardLayoutProps){
           </a>
           <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center text-indigo-600">
             <Link  href="/" className="mr-5 hover:text-gray-900">Home</Link>
-            <Link href= "/user/get-users" className="mr-5 hover:text-gray-900">Users</Link>
-            <Link href= "/product/get-products" className="mr-5 hover:text-gray-900">Products</Link>
+            <Link href= "/user" className="mr-5 hover:text-gray-900">Users</Link>
+            <Link href= "/product" className="mr-5 hover:text-gray-900">Products</Link>
           </nav>
           {!session && status == "unauthenticated" && (
             <Link className="px-3" href="/api/auth/signin" onClick={(e) => {
