@@ -8,7 +8,9 @@ function ProductList({products}:any){
 export default ProductList
 
 export async function getStaticProps(){
-  const response = await fetch('https://shopweb-api.herokuapp.com/products');
+  const response = await fetch('https://shopweb-api.herokuapp.com/products', {
+    method: 'GET'
+  });
   const data = await response.json();
 
   return {

@@ -1,6 +1,5 @@
 import CreateUserForm from "@/components/createUserForm"
 import React, {useState } from "react"
-import Layout from "../layout/layout";
 
 function RegisterUser(){
   const [name, setName] = useState("");
