@@ -30,12 +30,6 @@ export default function Login(){
         }
       });
       const data = await response.json();
-      if(data.message){
-        router.push('/user')
-      }
-      router.push('/login');
-    }
-    router.push('/login');
   }
   return <>
     <LoginForm 
@@ -46,4 +40,5 @@ export default function Login(){
     handleLogin = {handleLogin}
     />
   </>
+}
 }
