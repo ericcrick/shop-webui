@@ -1,5 +1,6 @@
 import ProductList from '@/components/product-list'
 import { BASE_URL } from '@/contants'
+import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
 
@@ -72,7 +73,10 @@ const Product = () => {
             <path d="M5 12h14M12 5l7 7-7 7"></path>
           </svg>
         </a>
-        <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Add New Product</button>
+
+        <Link className='flex ml-auto' href="/product/create-product">
+        <button className=" text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Add New Product</button>
+        </Link>
       </div>
     </div>
   </section>

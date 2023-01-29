@@ -29,8 +29,6 @@ function RegisterUser(){
       }
     });
     const data = await response.json();
-
-    console.log(data);
   }
   return (
     <>
