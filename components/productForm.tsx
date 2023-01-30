@@ -1,7 +1,6 @@
 import React, { useReducer, useState } from "react";
 import { useRouter } from "next/router";
-import ErrorMessage from "./errorMessage";
-import SuccessMessage from "./successMessage";
+
 const formReducer = (state: any, event: any) => {
   return {
     ...state,
@@ -15,8 +14,6 @@ interface statusType{
 }
 const ProductForm = ()=>{
     const [formData, setFormData] = useReducer(formReducer, {});
-    const [status,setStatus]: any = useState({});
-    const [isFormSubmit, setIsFormSubmit] = useState(false);
     const router = useRouter();
 
     //handle form submit
@@ -35,22 +32,19 @@ const ProductForm = ()=>{
               });
     
               const data = await response.json();
-              setStatus(data);
-              setIsFormSubmit(true);
+              if(!data?.message &&  (data?.productName !== undefined || null )){
+                alert("Product Added")
+                router.reload();
+                return;
+              }
+              alert(data?.message)
         } catch (error) {
-            console.log("No Internet/ Or Server Error")
+            alert("No Iternet Access");
+            return;
         }
     }
     return(
         <>
-        {
-            status?.message === "Product Name Already Exist" ? (
-               <ErrorMessage submitted={isFormSubmit}></ErrorMessage>
-                
-            ):(
-                <SuccessMessage submitted= {isFormSubmit}></SuccessMessage>
-            )
-        }
         <section className="text-gray-600 body-font relative">
         <div className="container px-5 py-24 mx-auto flex sm:flex-nowrap flex-wrap">
 
